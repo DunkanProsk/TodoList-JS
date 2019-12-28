@@ -24,6 +24,7 @@ let render = () => {
 
     todoList.forEach((item, index) => {
         let li = document.createElement('li');
+        let div = document.createElement('div');
         let closebtn = document.createElement('button');
         let editbtn = document.createElement('button');
         let editInput = document.createElement('input');
@@ -35,12 +36,13 @@ let render = () => {
         li.addEventListener('click', (e) => {
             if(e.target.tagName === 'LI') {
                 let i = event.target.dataset.id;
-                (todoList[i].checked == true) ? (todoList[i].checked = false) : (todoList[i].checked = true);
+                (todoList[i].checked === true) ? (todoList[i].checked = false) : (todoList[i].checked = true);
                 render();
             };
         });
 
-        li.append(closebtn);
+        li.append(div);
+        div.append(closebtn);
         closebtn.textContent = 'X';
         closebtn.setAttribute('class', 'close');
         closebtn.setAttribute('data-idd', index);
@@ -50,7 +52,7 @@ let render = () => {
             render();
         });
 
-        li.append(editbtn);
+        div.append(editbtn);
         editbtn.textContent = 'editing';
         editbtn.setAttribute('class', 'edit');
         editbtn.setAttribute('data-idedit', index);
@@ -59,9 +61,12 @@ let render = () => {
             li.append(editInput);
             editInput.setAttribute('class', 'input-field-2');
             editInput.setAttribute('size','10');
+            editInput.setAttribute('text-align','left');
+            editInput.setAttribute('maxlength','12');
+            editInput.setAttribute('value', todoList[i].name);
             editInput.addEventListener('keyup', (e) => {
                 if(e.key === 'Enter') {
-                    if(e.target.value !== '' && e.target.value !== null){
+                    if(e.target.value !== '' && e.target.value !== null) {
                         todoList[i].name = e.target.value;
                     } else {
                         alert('empty line!');
@@ -71,9 +76,9 @@ let render = () => {
             });
         });
 
-        if (todoList[index].checked == true) {
+        if (todoList[index].checked === true) {
             li.classList.toggle('checked');
-        }
+        };
     });
 };
 
