@@ -42,7 +42,7 @@ li{
     text-align: center;
     font-family: 'Comfortaa', cursive;
     display: inline-block;
-    color: #b2b2b2;
+    color: #303030;
     background-color: #fff;
     font-weight: 700;
     text-decoration: none;
@@ -76,8 +76,8 @@ li{
 .input-field-2 {
     position: absolute;
     left: 70px;
-    height: 22px;
-    width: 210px;
+    height: 1.5em;
+    width: 42%;
     padding-left: 7px;
     margin-top: -4px;
     font-family: 'Comfortaa', cursive;
@@ -152,7 +152,7 @@ li{
 }
 
 .input-field{
-    color: #000000;
+    color: #303030;
     cursor: text;
 }
 
