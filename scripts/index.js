@@ -27,6 +27,8 @@ let render = () => {
         let div = document.createElement('div');
         let closebtn = document.createElement('button');
         let editbtn = document.createElement('button');
+        let editEnterbtn = document.createElement('button');
+        let editClosebtn = document.createElement('button');
         let editInput = document.createElement('input');
 
         list.append(li);
@@ -53,13 +55,44 @@ let render = () => {
         });
 
         div.append(editbtn);
-        editbtn.textContent = 'editing';
+        editbtn.textContent = 'edit';
         editbtn.setAttribute('class', 'edit');
         editbtn.setAttribute('data-idedit', index);
         editbtn.addEventListener('click', (e) => {
+
+            e.stopImmediatePropagation();
+            closebtn.setAttribute('style', 'display: none');
+            editbtn.setAttribute( 'style', 'display: none');
+
+            div.append(editEnterbtn);
+            editEnterbtn.textContent = 'enter';
+            editEnterbtn.setAttribute('class', 'editEnt');
+            editEnterbtn.setAttribute('data-idedit', index);
+            editEnterbtn.addEventListener('click', (e) => {
+                let impValue = () => {
+                    let impValue = document.getElementById('input-field-2').value;
+                    return impValue;
+                };
+                if(impValue() !== '') {
+                    todoList[i].name = impValue();
+                } else {
+                    alert('empty line!');
+                }
+                render();
+            });
+
+            div.append(editClosebtn);
+            editClosebtn.textContent = 'X';
+            editClosebtn.setAttribute('class', 'close');
+            editClosebtn.setAttribute('data-idd', index);
+            editClosebtn.addEventListener('click', (e) => {
+                render();
+            });
+
             let i = event.target.dataset.idedit;
             li.append(editInput);
             editInput.setAttribute('class', 'input-field-2');
+            editInput.setAttribute('id', 'input-field-2');
             editInput.setAttribute('size','10');
             editInput.setAttribute('text-align','left');
             editInput.setAttribute('maxlength','12');
@@ -73,6 +106,9 @@ let render = () => {
                     };
                     render();
                 };
+            });
+            editbtn.addEventListener('click', (e) => {
+                todoList[i].name = e.target.value;
             });
         });
 
